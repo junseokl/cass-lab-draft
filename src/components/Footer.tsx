@@ -4,19 +4,14 @@
  */
 
 import React from 'react';
-import { Mail, BookOpen, Fingerprint, MapPin, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, ExternalLink, Fingerprint } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface FooterProps {
-  setActiveTab: (tab: string) => void;
-  setSelectedMemberId?: (id: string | null) => void;
-}
+export const Footer: React.FC = () => {
+  const navigate = useNavigate();
 
-export const Footer: React.FC<FooterProps> = ({ setActiveTab, setSelectedMemberId }) => {
-  const handleNavClick = (tabId: string) => {
-    setActiveTab(tabId);
-    if (setSelectedMemberId) {
-      setSelectedMemberId(null);
-    }
+  const handleNavClick = (path: string) => {
+    navigate(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -52,27 +47,27 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, setSelectedMemberI
             <h3 className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase mb-4">STRUCTURE</h3>
             <ul className="space-y-2.5 text-sm font-mono text-zinc-400">
               <li>
-                <button onClick={() => handleNavClick('research')} className="hover:text-emerald-400 transition-colors focus:outline-none" id="footer-link-research">
+                <button onClick={() => handleNavClick('/research')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-research">
                   » Current Initiatives
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('publications')} className="hover:text-emerald-400 transition-colors focus:outline-none" id="footer-link-publications">
+                <button onClick={() => handleNavClick('/publications')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-publications">
                   » Publications Database
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('archives')} className="hover:text-emerald-400 transition-colors focus:outline-none" id="footer-link-archives">
+                <button onClick={() => handleNavClick('/archives')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-archives">
                   » Science Policy Archives
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('team')} className="hover:text-emerald-400 transition-colors focus:outline-none" id="footer-link-team">
+                <button onClick={() => handleNavClick('/team')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-team">
                   » Intellectual Authority / Roster
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('about')} className="hover:text-emerald-400 transition-colors focus:outline-none" id="footer-link-about">
+                <button onClick={() => handleNavClick('/about')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-about">
                   » About / Pedagogy
                 </button>
               </li>
@@ -134,7 +129,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, setSelectedMemberI
             <span className="block sm:inline mt-1 sm:mt-0">All Rights Reserved.</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-emerald-500/60">● SYSTEMS LIVE</span>
+            <span className="text-emerald-500/60 font-medium">● SYSTEMS LIVE</span>
             <span>V4.1.2</span>
           </div>
         </div>

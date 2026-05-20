@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { InitiativesView } from './components/InitiativesView';
@@ -14,75 +15,50 @@ import { ArchivesPortal } from './components/ArchivesPortal';
 import { ContactPortal } from './components/ContactPortal';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('research');
-  const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
-
-  // Sync scroll on tab transitions
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [activeTab]);
-
-  const handleNavigateToTab = (tabId: string) => {
-    setActiveTab(tabId);
-  };
+function AnimatedRoutes() {
+  const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fdfdfc] text-zinc-900 selection:bg-emerald-500 selection:text-white">
-      
-      {/* Brand Header */}
-      <Header 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab}
-        setSelectedMemberId={setSelectedMemberId}
-      />
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="flex-grow flex flex-col"
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Navigate to="/research" replace />} />
+          <Route path="/research" element={<InitiativesView />} />
+          <Route path="/publications" element={<PublicationsView />} />
+          <Route path="/archives" element={<ArchivesPortal />} />
+          <Route path="/team" element={<TeamView />} />
+          <Route path="/team/:memberId" element={<TeamView />} />
+          <Route path="/about" element={<AboutView />} />
+          <Route path="/contact" element={<ContactPortal />} />
+          <Route path="*" element={<Navigate to="/research" replace />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
-      {/* Main Multi-Screen Content Container */}
-      <main className="flex-1">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {activeTab === 'research' && (
-              <InitiativesView onNavigateToTab={handleNavigateToTab} />
-            )}
-            
-            {activeTab === 'publications' && (
-              <PublicationsView />
-            )}
-            
-            {activeTab === 'archives' && (
-              <ArchivesPortal />
-            )}
-            
-            {activeTab === 'team' && (
-              <TeamView 
-                selectedId={selectedMemberId} 
-                setSelectedId={setSelectedMemberId} 
-              />
-            )}
-            
-            {activeTab === 'about' && (
-              <AboutView />
-            )}
-            
-            {activeTab === 'contact' && (
-              <ContactPortal />
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </main>
+export default function App() {
+  return (
+    <HashRouter>
+      <div className="min-h-screen flex flex-col bg-[#fdfdfc] text-zinc-900 selection:bg-emerald-500 selection:text-white">
+        {/* Brand Header */}
+        <Header />
 
-      {/* Brand Footer colophon */}
-      <Footer 
-        setActiveTab={setActiveTab} 
-        setSelectedMemberId={setSelectedMemberId} 
-      />
+        {/* Main Multi-Screen Content Container */}
+        <main className="flex-1 flex flex-col">
+          <AnimatedRoutes />
+        </main>
 
-    </div>
+        {/* Brand Footer colophon */}
+        <Footer />
+      </div>
+    </HashRouter>
   );
 }

@@ -4,36 +4,40 @@
  */
 
 import React, { useState } from 'react';
-import { Menu, X, Landmark, Compass, Award } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-interface HeaderProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  setSelectedMemberId?: (id: string | null) => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({ 
-  activeTab, 
-  setActiveTab,
-  setSelectedMemberId 
-}) => {
+export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
-    { id: 'research', label: 'RESEARCH' },
-    { id: 'publications', label: 'PUBLICATIONS' },
-    { id: 'archives', label: 'ARCHIVES' },
-    { id: 'team', label: 'TEAM' },
-    { id: 'about', label: 'ABOUT' },
+    { id: 'research', label: 'RESEARCH', path: '/research' },
+    { id: 'publications', label: 'PUBLICATIONS', path: '/publications' },
+    { id: 'archives', label: 'ARCHIVES', path: '/archives' },
+    { id: 'team', label: 'TEAM', path: '/team' },
+    { id: 'about', label: 'ABOUT', path: '/about' },
   ];
 
-  const handleNavClick = (tabId: string) => {
-    setActiveTab(tabId);
-    if (setSelectedMemberId) {
-      setSelectedMemberId(null); // Clear selected member when navigating
+  const getIsActive = (itemId: string, itemPath: string) => {
+    const currentPath = location.pathname;
+    if (itemId === 'research') {
+      return currentPath === '/' || currentPath === '/research';
     }
-    setMobileMenuOpen(false);
+    if (itemId === 'team') {
+      return currentPath.startsWith('/team');
+    }
+    return currentPath === itemPath;
   };
+
+  const handleNavClick = (path: string) => {
+    navigate(path);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  const isContactActive = location.pathname === '/contact';
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-zinc-200 bg-white/95 backdrop-blur-md">
@@ -41,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
         
         {/* Brand Logo - High Aesthetic L-Bracket with Emerald Box */}
         <button 
-          onClick={() => handleNavClick('research')}
+          onClick={() => handleNavClick('/research')}
           className="group flex items-center gap-4 text-left focus:outline-none"
           id="nav-logo-btn"
         >
@@ -58,11 +62,11 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8 font-mono text-xs tracking-wider">
           {navItems.map((item) => {
-            const isActive = activeTab === item.id;
+            const isActive = getIsActive(item.id, item.path);
             return (
               <button
                 key={item.id}
-                onClick={() => handleNavClick(item.id)}
+                onClick={() => handleNavClick(item.path)}
                 className={`relative py-2 font-medium transition-colors duration-200 focus:outline-none ${
                   isActive ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-600'
                 }`}
@@ -77,9 +81,9 @@ export const Header: React.FC<HeaderProps> = ({
           })}
           
           <button
-            onClick={() => handleNavClick('contact')}
+            onClick={() => handleNavClick('/contact')}
             className={`cursor-pointer border px-5 py-2.5 font-medium transition-all duration-300 focus:outline-none rounded-none text-xs ${
-              activeTab === 'contact'
+              isContactActive
                 ? 'bg-zinc-950 border-zinc-950 text-white shadow-xs'
                 : 'border-zinc-900 text-zinc-900 hover:bg-zinc-90 w-full hover:text-zinc-50'
             }`}
@@ -105,11 +109,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden border-t border-zinc-200 bg-white/98 backdrop-blur-lg px-6 py-8 animate-fade-in absolute w-full left-0 shadow-lg">
           <div className="flex flex-col gap-6 text-center font-mono text-sm tracking-widest">
             {navItems.map((item) => {
-              const isActive = activeTab === item.id;
+              const isActive = getIsActive(item.id, item.path);
               return (
                 <button
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
+                  onClick={() => handleNavClick(item.path)}
                   className={`py-3 border-b border-zinc-100 font-semibold transition-all ${
                     isActive ? 'text-zinc-900 font-bold border-emerald-500' : 'text-zinc-400'
                   }`}
@@ -121,9 +125,9 @@ export const Header: React.FC<HeaderProps> = ({
             })}
             
             <button
-              onClick={() => handleNavClick('contact')}
+              onClick={() => handleNavClick('/contact')}
               className={`mt-4 border px-6 py-3.5 font-bold tracking-widest transition-all rounded-xs ${
-                activeTab === 'contact'
+                isContactActive
                   ? 'bg-zinc-950 border-zinc-950 text-white'
                   : 'border-zinc-900 text-zinc-900'
               }`}

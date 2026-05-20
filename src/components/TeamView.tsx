@@ -8,13 +8,11 @@ import { Mail, Compass, Landmark, User, ShieldAlert, ArrowLeft, X, Link2, Extern
 import { TeamMember } from '../types';
 import { drLiangChen, teamMembers } from '../data';
 import { motion, AnimatePresence } from 'motion/react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-interface TeamViewProps {
-  selectedId: string | null;
-  setSelectedId: (id: string | null) => void;
-}
-
-export const TeamView: React.FC<TeamViewProps> = ({ selectedId, setSelectedId }) => {
+export const TeamView: React.FC = () => {
+  const { memberId } = useParams();
+  const navigate = useNavigate();
   const [drawerMember, setDrawerMember] = useState<TeamMember | null>(null);
 
   // Group members under target roles
@@ -25,7 +23,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ selectedId, setSelectedId })
 
   const handleMemberClick = (member: TeamMember) => {
     if (member.id === 'liang-chen') {
-      setSelectedId('liang-chen');
+      navigate('/team/liang-chen');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setDrawerMember(member);
@@ -51,7 +49,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ selectedId, setSelectedId })
       <AnimatePresence mode="wait">
         
         {/* VIEW A: DR LIANG CHEN ACTIVE DETAIL PROFILE (IMAGE #2 TARGET) */}
-        {selectedId === 'liang-chen' ? (
+        {memberId === 'liang-chen' ? (
           <motion.div
             key="director-detail"
             initial={{ opacity: 0, x: -10 }}
@@ -62,7 +60,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ selectedId, setSelectedId })
             {/* Header back button */}
             <div className="border-b border-zinc-200 pb-6 flex items-center justify-between">
               <button
-                onClick={() => setSelectedId(null)}
+                onClick={() => navigate('/team')}
                 className="cursor-pointer font-mono text-xs font-bold text-zinc-500 hover:text-zinc-950 flex items-center gap-2 focus:outline-none"
                 id="btn-back-to-team"
               >
@@ -237,7 +235,7 @@ export const TeamView: React.FC<TeamViewProps> = ({ selectedId, setSelectedId })
 
             {/* Prominent Director Callout Row */}
             <div 
-              onClick={() => setSelectedId('liang-chen')}
+              onClick={() => navigate('/team/liang-chen')}
               className="group cursor-pointer grid grid-cols-1 md:grid-cols-12 gap-6 border border-zinc-200 hover:border-zinc-900 bg-white p-6 transition-all duration-300"
               id="director-banner"
             >

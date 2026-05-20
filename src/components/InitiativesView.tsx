@@ -6,12 +6,10 @@
 import React from 'react';
 import { CheckCircle, Database, FileText, Map, ArrowRight, Table } from 'lucide-react';
 import { archiveLogs } from '../data';
+import { useNavigate } from 'react-router-dom';
 
-interface InitiativesViewProps {
-  onNavigateToTab: (tabId: string) => void;
-}
-
-export const InitiativesView: React.FC<InitiativesViewProps> = ({ onNavigateToTab }) => {
+export const InitiativesView: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="mx-auto max-w-7xl px-6 md:px-10 py-12 md:py-20 animate-fade-in" id="current-initiatives">
       
@@ -79,7 +77,7 @@ export const InitiativesView: React.FC<InitiativesViewProps> = ({ onNavigateToTa
             </p>
             <div className="pt-4">
               <button 
-                onClick={() => onNavigateToTab('team')}
+                onClick={() => navigate('/team')}
                 className="cursor-pointer font-mono text-xs font-bold text-zinc-900 border-b-2 border-emerald-500 hover:text-emerald-600 transition-colors pb-1 flex items-center gap-2"
                 id="proj-1-navigate-team"
               >
@@ -299,7 +297,7 @@ export const InitiativesView: React.FC<InitiativesViewProps> = ({ onNavigateToTa
             </p>
             <div className="pt-4">
               <button 
-                onClick={() => onNavigateToTab('archives')}
+                onClick={() => navigate('/archives')}
                 className="cursor-pointer font-mono text-xs font-bold text-zinc-900 border-b-2 border-emerald-500 hover:text-emerald-600 transition-colors pb-1 flex items-center gap-2"
                 id="proj-3-navigate-archives"
               >
