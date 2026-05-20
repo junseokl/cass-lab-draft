@@ -1,0 +1,6 @@
+{
+  "name": "CASS Laboratory",
+  "description": "Chinese and Asian Science Studies (CASS) Laboratory. Investigating how science, technology, medicine, and environment shaped Asian industrial and post-industrial modernities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
