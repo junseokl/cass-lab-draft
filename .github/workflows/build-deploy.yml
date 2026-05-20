@@ -1,0 +1,66 @@
+# GitHub Actions Workflow to Build and Deploy CASS Lab Website
+# This workflow builds the React + Vite static SPA and can deploy it directly to GitHub Pages.
+
+name: Build and Deploy CASS Lab
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+# Grant access to deploy to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent concurrent deployments and save clean resources
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        run: npm ci
+
+      - name: Run Schema Linter / Type Check
+        run: npm run lint
+
+      - name: Build Production Assets
+        run: npm run build
+        # This compiles the React 19 app into the raw static 'dist/' subdirectory.
+
+      # === OPTION A: Deploying Directly to GitHub Pages ===
+      # (Defaults to out-of-the-box configuration. Ensure GitHub Pages build source is set to "GitHub Actions" in Settings)
+      - name: Setup Pages Assets
+        uses: actions/configure-pages@v5
+
+      - name: Upload Finished Static Site Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy-pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
