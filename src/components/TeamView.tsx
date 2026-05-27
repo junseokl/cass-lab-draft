@@ -270,48 +270,49 @@ export const TeamView: React.FC = () => {
                 </div>
               </div>
             </div>
-
             {/* Section 1: Postdoctoral Researchers */}
-            <div className="space-y-6">
-              <h3 className="font-serif text-xl border-b border-zinc-200 pb-3 font-semibold text-zinc-900">
-                Postdoctoral Researchers
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" id="roster-postdocs">
-                {postdocs.map((member) => (
-                  <div
-                    key={member.id}
-                    onClick={() => handleMemberClick(member)}
-                    className="cursor-pointer group border border-zinc-200 hover:border-zinc-800 bg-white p-4 flex gap-4 transition-all duration-300 h-[160px]"
-                    id={`team-card-${member.id}`}
-                  >
-                    <div className="w-[100px] h-[126px] overflow-hidden grayscale group-hover:grayscale-0 shrink-0 border border-zinc-100 bg-zinc-50">
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
-                        referrerPolicy="no-referrer"
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-102"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between py-1 overflow-hidden">
-                      <div className="space-y-1">
-                        <h4 className="font-serif text-sm font-bold text-zinc-900 truncate group-hover:text-emerald-600 transition-colors">
-                          {member.name}
-                        </h4>
-                        <p className="font-mono text-[10px] text-zinc-400 font-bold uppercase truncate">
-                          {member.role.replace('Postdoctoral Researcher, ', '')}
-                        </p>
-                        <p className="font-sans text-[11px] text-zinc-500 line-clamp-3 leading-relaxed">
-                          {member.bio}
-                        </p>
+            {postdocs.length > 0 && (
+              <div className="space-y-6">
+                <h3 className="font-serif text-xl border-b border-zinc-200 pb-3 font-semibold text-zinc-900">
+                  Postdoctoral Researchers
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" id="roster-postdocs">
+                  {postdocs.map((member) => (
+                    <div
+                      key={member.id}
+                      onClick={() => handleMemberClick(member)}
+                      className="cursor-pointer group border border-zinc-200 hover:border-zinc-800 bg-white p-4 flex gap-4 transition-all duration-300 h-[160px]"
+                      id={`team-card-${member.id}`}
+                    >
+                      <div className="w-[100px] h-[126px] overflow-hidden grayscale group-hover:grayscale-0 shrink-0 border border-zinc-100 bg-zinc-50">
+                        <img 
+                          src={member.image} 
+                          alt={member.name}
+                          referrerPolicy="no-referrer"
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                        />
                       </div>
-                      <span className="font-mono text-[9px] text-zinc-400 group-hover:text-zinc-650 transition-colors">
-                        INSPECT PROFILE »
-                      </span>
+                      <div className="flex flex-col justify-between py-1 overflow-hidden">
+                        <div className="space-y-1">
+                          <h4 className="font-serif text-sm font-bold text-zinc-900 truncate group-hover:text-emerald-600 transition-colors">
+                            {member.name}
+                          </h4>
+                          <p className="font-mono text-[10px] text-zinc-400 font-bold uppercase truncate">
+                            {member.role.replace('Postdoctoral Researcher, ', '')}
+                          </p>
+                          <p className="font-sans text-[11px] text-zinc-500 line-clamp-3 leading-relaxed">
+                            {member.bio}
+                          </p>
+                        </div>
+                        <span className="font-mono text-[9px] text-zinc-400 group-hover:text-zinc-650 transition-colors">
+                          INSPECT PROFILE »
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Section 2: Ph.D. Candidates */}
             <div className="space-y-6">
@@ -385,10 +386,10 @@ export const TeamView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Research Interns */}
+              {/* Research Assistants */}
               <div className="space-y-4">
                 <h3 className="font-serif text-lg border-b border-zinc-200 pb-2 font-semibold text-zinc-900">
-                  Research Interns
+                  Research Assistants
                 </h3>
                 <div className="space-y-3" id="roster-interns">
                   {interns.map((member) => (

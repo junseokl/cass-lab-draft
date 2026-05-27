@@ -6,7 +6,8 @@
   --font-serif: "Crimson Pro", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  --color-brand-green: rgb(16, 185, 129);
+  --color-brand-blue: rgb(3, 75, 117);
+  --color-brand-green: rgb(3, 75, 117);
 }
 
 /* Custom editorial styles */

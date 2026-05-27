@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <div className="relative h-6 w-6 border-l border-t border-zinc-100">
-                <div className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-emerald-500" />
+                <div className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-sky-500" />
               </div>
               <span className="font-serif text-lg font-bold tracking-tight">CASS Lab</span>
             </div>
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
               Chinese and Asian Science Studies Laboratory. Examining how science, technology, medicine, and environment arrived in the greater Asia and shaped the region’s modern industrial sociology.
             </p>
             <div className="flex flex-wrap gap-2 mt-2">
-              <span className="inline-flex items-center text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-800 text-emerald-400 px-2 py-0.5 uppercase">
+              <span className="inline-flex items-center text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-800 text-sky-400 px-2 py-0.5 uppercase">
                 INST_ID: RM402-CAB
               </span>
               <span className="inline-flex items-center text-[10px] font-mono tracking-wider bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 uppercase">
@@ -47,27 +47,27 @@ export const Footer: React.FC = () => {
             <h3 className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase mb-4">STRUCTURE</h3>
             <ul className="space-y-2.5 text-sm font-mono text-zinc-400">
               <li>
-                <button onClick={() => handleNavClick('/research')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-research">
+                <button onClick={() => handleNavClick('/research')} className="hover:text-sky-400 transition-colors focus:outline-none text-left animate-fade-in" id="footer-link-research">
                   » Current Initiatives
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('/publications')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-publications">
+                <button onClick={() => handleNavClick('/publications')} className="hover:text-sky-400 transition-colors focus:outline-none text-left animate-fade-in" id="footer-link-publications">
                   » Publications Database
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('/archives')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-archives">
-                  » Science Policy Archives
+                <button onClick={() => handleNavClick('/teaching')} className="hover:text-sky-400 transition-colors focus:outline-none text-left animate-fade-in" id="footer-link-teaching">
+                  » Courses & Instruction
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('/team')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-team">
+                <button onClick={() => handleNavClick('/team')} className="hover:text-sky-400 transition-colors focus:outline-none text-left animate-fade-in" id="footer-link-team">
                   » Intellectual Authority / Roster
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNavClick('/about')} className="hover:text-emerald-400 transition-colors focus:outline-none text-left" id="footer-link-about">
+                <button onClick={() => handleNavClick('/about')} className="hover:text-sky-400 transition-colors focus:outline-none text-left animate-fade-in" id="footer-link-about">
                   » About / Pedagogy
                 </button>
               </li>
@@ -79,7 +79,7 @@ export const Footer: React.FC = () => {
             <h3 className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">OFFICE HEADQUARTERS</h3>
             <div className="space-y-3 font-sans text-sm text-zinc-400 leading-relaxed">
               <div className="flex items-start gap-2.5">
-                <MapPin className="text-emerald-500 shrink-0 mt-0.5" size={16} />
+                <MapPin className="text-sky-500 shrink-0 mt-0.5" size={16} />
                 <span>
                   Room 402, North Wing,<br />
                   Computational Arts Building,<br />
@@ -88,7 +88,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="text-zinc-500 shrink-0" size={16} />
-                <a href="mailto:director@casslab.edu" className="hover:text-emerald-400 transition-colors">
+                <a href="mailto:director@casslab.edu" className="hover:text-sky-400 transition-colors">
                   director@casslab.edu
                 </a>
               </div>
@@ -111,7 +111,7 @@ export const Footer: React.FC = () => {
                   href="https://orcid.org" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="inline-flex items-center gap-1 text-zinc-400 hover:text-emerald-400 transition-colors"
+                  className="inline-flex items-center gap-1 text-zinc-400 hover:text-sky-400 transition-colors"
                 >
                   ORCID Portal <ExternalLink size={12} />
                 </a>
@@ -124,12 +124,12 @@ export const Footer: React.FC = () => {
         {/* Bottom Colophon */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 text-xs font-mono text-zinc-600">
           <div>
-            <span>© 2026 CASS Lab. Directed by Dr. Liang Chen.</span>
+            <span>© 2026 CASS Lab. Directed by Dr. Jongsik Christian Yi.</span>
             <span className="hidden sm:inline mx-3 text-zinc-800">|</span>
             <span className="block sm:inline mt-1 sm:mt-0">All Rights Reserved.</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-emerald-500/60 font-medium">● SYSTEMS LIVE</span>
+            <span className="text-sky-500/60 font-medium animate-pulse">● SYSTEMS LIVE</span>
             <span>V4.1.2</span>
           </div>
         </div>

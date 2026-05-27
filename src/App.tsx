@@ -11,8 +11,8 @@ import { InitiativesView } from './components/InitiativesView';
 import { PublicationsView } from './components/PublicationsView';
 import { TeamView } from './components/TeamView';
 import { AboutView } from './components/AboutView';
-import { ArchivesPortal } from './components/ArchivesPortal';
-import { ContactPortal } from './components/ContactPortal';
+import { TeachingView } from './components/TeachingView';
+import { HomeView } from './components/HomeView';
 import { motion, AnimatePresence } from 'motion/react';
 
 function AnimatedRoutes() {
@@ -29,15 +29,14 @@ function AnimatedRoutes() {
         className="flex-grow flex flex-col"
       >
         <Routes location={location}>
-          <Route path="/" element={<Navigate to="/research" replace />} />
+          <Route path="/" element={<HomeView />} />
           <Route path="/research" element={<InitiativesView />} />
           <Route path="/publications" element={<PublicationsView />} />
-          <Route path="/archives" element={<ArchivesPortal />} />
           <Route path="/team" element={<TeamView />} />
           <Route path="/team/:memberId" element={<TeamView />} />
           <Route path="/about" element={<AboutView />} />
-          <Route path="/contact" element={<ContactPortal />} />
-          <Route path="*" element={<Navigate to="/research" replace />} />
+          <Route path="/teaching" element={<TeachingView />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </motion.div>
     </AnimatePresence>
@@ -47,7 +46,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <HashRouter>
-      <div className="min-h-screen flex flex-col bg-[#fdfdfc] text-zinc-900 selection:bg-emerald-500 selection:text-white">
+      <div className="min-h-screen flex flex-col bg-[#fdfdfc] text-zinc-900 selection:bg-sky-800 selection:text-white">
         {/* Brand Header */}
         <Header />
 

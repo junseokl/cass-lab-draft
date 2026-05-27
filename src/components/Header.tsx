@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
   const navItems = [
     { id: 'research', label: 'RESEARCH', path: '/research' },
     { id: 'publications', label: 'PUBLICATIONS', path: '/publications' },
-    { id: 'archives', label: 'ARCHIVES', path: '/archives' },
+    { id: 'teaching', label: 'TEACHING', path: '/teaching' },
     { id: 'team', label: 'TEAM', path: '/team' },
     { id: 'about', label: 'ABOUT', path: '/about' },
   ];
@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
   const getIsActive = (itemId: string, itemPath: string) => {
     const currentPath = location.pathname;
     if (itemId === 'research') {
-      return currentPath === '/' || currentPath === '/research';
+      return currentPath === '/research';
     }
     if (itemId === 'team') {
       return currentPath.startsWith('/team');
@@ -37,26 +37,28 @@ export const Header: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const isContactActive = location.pathname === '/contact';
-
   return (
     <header className="sticky top-0 z-40 w-full border-b border-zinc-200 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl h-20 items-center justify-between px-6 md:px-10">
         
-        {/* Brand Logo - High Aesthetic L-Bracket with Emerald Box */}
+        {/* Brand Logo - Replica Wordmark of Uploaded High-Res Image */}
         <button 
-          onClick={() => handleNavClick('/research')}
+          onClick={() => handleNavClick('/')}
           className="group flex items-center gap-4 text-left focus:outline-none"
           id="nav-logo-btn"
         >
-          <div className="relative h-10 w-10 flex items-center justify-center border-l-2 border-t-2 border-zinc-900 transition-transform duration-300 group-hover:scale-[1.03]">
-            {/* The signature emerald green square at bottom right of the corner frame */}
-            <div className="absolute bottom-0 right-0 h-4.5 w-4.5 bg-emerald-500 transition-all duration-300 group-hover:bg-emerald-600 rounded-xs shadow-xs" />
+          <div className="flex flex-col items-center justify-center border border-sky-900/10 p-2 bg-sky-50/30 hover:bg-sky-50/50 rounded-xs transition-all duration-350" style={{ minWidth: '92px', minHeight: '60px' }}>
+            <div className="text-[13px] font-bold text-sky-950 font-serif leading-none tracking-[0.06em] select-none" style={{ fontFamily: 'Georgia, "Songti SC", "SimSun", "Noto Serif SC", serif' }}>
+              亞洲科技
+            </div>
+            <div className="text-[19px] font-black text-sky-900 font-serif leading-none mt-1 select-none tracking-[0.12em]" style={{ fontFamily: 'Georgia, serif' }}>
+              CASS
+            </div>
           </div>
-          <div>
+          {/*<div>
             <span className="font-serif text-2xl font-bold tracking-tight text-zinc-900 block leading-none">CASS Lab</span>
             <span className="text-[10px] font-mono tracking-widest text-zinc-400 block uppercase mt-1">Chinese & Asian Science Studies</span>
-          </div>
+          </div>*/}
         </button>
 
         {/* Desktop Navigation */}
@@ -68,29 +70,17 @@ export const Header: React.FC = () => {
                 key={item.id}
                 onClick={() => handleNavClick(item.path)}
                 className={`relative py-2 font-medium transition-colors duration-200 focus:outline-none ${
-                  isActive ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-600'
+                  isActive ? 'text-zinc-900 font-bold' : 'text-zinc-400 hover:text-zinc-600'
                 }`}
                 id={`nav-${item.id}`}
               >
                 {item.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-emerald-500" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-sky-800" />
                 )}
               </button>
             );
           })}
-          
-          <button
-            onClick={() => handleNavClick('/contact')}
-            className={`cursor-pointer border px-5 py-2.5 font-medium transition-all duration-300 focus:outline-none rounded-none text-xs ${
-              isContactActive
-                ? 'bg-zinc-950 border-zinc-950 text-white shadow-xs'
-                : 'border-zinc-900 text-zinc-900 hover:bg-zinc-90 w-full hover:text-zinc-50'
-            }`}
-            id="nav-contact"
-          >
-            CONTACT
-          </button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -115,7 +105,7 @@ export const Header: React.FC = () => {
                   key={item.id}
                   onClick={() => handleNavClick(item.path)}
                   className={`py-3 border-b border-zinc-100 font-semibold transition-all ${
-                    isActive ? 'text-zinc-900 font-bold border-emerald-500' : 'text-zinc-400'
+                    isActive ? 'text-zinc-900 font-bold border-sky-800' : 'text-zinc-400'
                   }`}
                   id={`mobile-nav-${item.id}`}
                 >
@@ -123,18 +113,6 @@ export const Header: React.FC = () => {
                 </button>
               );
             })}
-            
-            <button
-              onClick={() => handleNavClick('/contact')}
-              className={`mt-4 border px-6 py-3.5 font-bold tracking-widest transition-all rounded-xs ${
-                isContactActive
-                  ? 'bg-zinc-950 border-zinc-950 text-white'
-                  : 'border-zinc-900 text-zinc-900'
-              }`}
-              id="mobile-nav-contact"
-            >
-              CONTACT PORTAL
-            </button>
           </div>
         </div>
       )}

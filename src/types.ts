@@ -38,6 +38,8 @@ export interface Publication {
   year: number;
   doi?: string;
   url?: string;
+  category?: 'books' | 'chapters' | 'journals' | 'translations' | 'reviews' | 'essays';
+  subCategory?: string;
 }
 
 export interface ArchiveLog {
